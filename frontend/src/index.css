@@ -1186,9 +1186,225 @@ body {
   margin-bottom: 0.5rem;
 }
 
-.host-city-years {
+.host-c.host-city-years {
   font-size: 0.75rem;
   color: var(--primary);
   font-weight: 600;
 }
 
+/* ==========================================================================
+   HOMEPAGE LANDING STYLES
+   ========================================================================== */
+
+.hero-section {
+  position: relative;
+  background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.12), transparent 50%),
+              radial-gradient(circle at bottom left, rgba(236, 72, 153, 0.08), transparent 50%),
+              rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  padding: 4rem 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(16px);
+}
+
+.hero-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #c084fc 0%, #ec4899 50%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -1px;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto 2.5rem auto;
+  line-height: 1.6;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.85rem 2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cta-button.primary {
+  background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.35);
+}
+
+.cta-button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(139, 92, 246, 0.5);
+  background: linear-gradient(135deg, #9333ea 0%, #6d28d9 100%);
+}
+
+.cta-button.secondary {
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+  border: 1px solid var(--panel-border);
+}
+
+.cta-button.secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Home Stats achievements styles */
+.home-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.home-stat-card {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: var(--transition-smooth);
+}
+
+.home-stat-card:hover {
+  transform: translateY(-4px);
+  background: rgba(139, 92, 246, 0.03);
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+.home-stat-val {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff 0%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.home-stat-lbl {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+}
+
+/* Interactive Feature Showcase Cards */
+.features-section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.features-section-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.feature-shortcuts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.feature-shortcut-card {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-shortcut-card:hover {
+  transform: translateY(-4px);
+  background: rgba(236, 72, 153, 0.03);
+  border-color: rgba(236, 72, 153, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.feature-shortcut-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(139, 92, 246, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  color: var(--primary);
+  transition: var(--transition-smooth);
+}
+
+.feature-shortcut-card:hover .feature-shortcut-icon {
+  background: rgba(236, 72, 153, 0.15);
+  color: var(--secondary);
+}
+
+.feature-shortcut-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.feature-shortcut-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.feature-shortcut-link {
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: var(--transition-smooth);
+}
+
+.feature-shortcut-card:hover .feature-shortcut-link {
+  color: var(--secondary);
+}

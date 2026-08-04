@@ -4,7 +4,8 @@ import {
   Globe, 
   Users, 
   TrendingUp, 
-  Search
+  Search,
+  Home
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -113,7 +114,7 @@ const OLYMPIC_RECORDS = [
 ];
 
 function App() {
-  const [activeTab, setActiveTab] = useState('overall');
+  const [activeTab, setActiveTab] = useState('home');
   const [filters, setFilters] = useState({ years: [], countries: [], sports: [] });
   const [loading, setLoading] = useState(true);
 
@@ -384,6 +385,13 @@ function App() {
         </div>
         <ul className="nav-links">
           <li 
+            className={`nav-item ${activeTab === 'home' ? 'active' : ''}`}
+            onClick={() => setActiveTab('home')}
+          >
+            <Home />
+            <span>Home</span>
+          </li>
+          <li 
             className={`nav-item ${activeTab === 'overall' ? 'active' : ''}`}
             onClick={() => setActiveTab('overall')}
           >
@@ -437,6 +445,88 @@ function App() {
 
       {/* Main Panel Content */}
       <main className="main-content">
+
+        {/* TAB 0: HOME LANDING PAGE */}
+        {activeTab === 'home' && (
+          <div className="tab-pane">
+            <div className="hero-section">
+              <h2 className="hero-title">Olympics Vault</h2>
+              <p className="hero-subtitle">
+                An advanced database indexing and predictive analysis suite mapping 120+ years of Summer Olympic history. Explore dynamic rosters, test forecasting models, and query statistics via natural language.
+              </p>
+              <div className="hero-buttons">
+                <button className="cta-button primary" onClick={() => setActiveTab('overall')}>
+                  Explore Analytics &rarr;
+                </button>
+                <button className="cta-button secondary" onClick={() => setActiveTab('predictor')}>
+                  Try ML Predictor &rarr;
+                </button>
+              </div>
+            </div>
+
+            {/* Achievements Stats Grid */}
+            <div className="home-stats-grid">
+              <div className="home-stat-card">
+                <div className="home-stat-val">30</div>
+                <div className="home-stat-lbl">Summer Editions</div>
+              </div>
+              <div className="home-stat-card">
+                <div className="home-stat-val">207</div>
+                <div className="home-stat-lbl">Countries Mapped</div>
+              </div>
+              <div className="home-stat-card">
+                <div className="home-stat-val">150K+</div>
+                <div className="home-stat-lbl">Athletes Indexed</div>
+              </div>
+              <div className="home-stat-card">
+                <div className="home-stat-val">39K+</div>
+                <div className="home-stat-lbl">Medals Tracked</div>
+              </div>
+            </div>
+
+            {/* Feature Exploration Grid */}
+            <h3 className="features-section-title">Platform Capabilities</h3>
+            <p className="features-section-desc">Click any of the core application capabilities below to navigate to their specialized analytical dashboards.</p>
+            
+            <div className="feature-shortcuts-grid">
+              <div className="feature-shortcut-card" onClick={() => setActiveTab('predictor')}>
+                <div className="feature-shortcut-icon">📈</div>
+                <h4 className="feature-shortcut-title">LA 2028 Predictor</h4>
+                <p className="feature-shortcut-text">
+                  Test a machine learning RandomForest model forecasting total medal distributions based on delegation size, historical metrics, and host advantages.
+                </p>
+                <div className="feature-shortcut-link">Open Predictor &rarr;</div>
+              </div>
+
+              <div className="feature-shortcut-card" onClick={() => setActiveTab('overall')}>
+                <div className="feature-shortcut-icon">📊</div>
+                <h4 className="feature-shortcut-title">Interactive Host Standings</h4>
+                <p className="feature-shortcut-text">
+                  Browse custom profiles, participation levels, and top country standings across all historic summer host cities.
+                </p>
+                <div className="feature-shortcut-link">Open Host Profile &rarr;</div>
+              </div>
+
+              <div className="feature-shortcut-card" onClick={() => setActiveTab('comparison')}>
+                <div className="feature-shortcut-icon">👥</div>
+                <h4 className="feature-shortcut-title">Country Comparison</h4>
+                <p className="feature-shortcut-text">
+                  Benchmark physical attributes (height, weight, age) and medal output of competing delegations side-by-side.
+                </p>
+                <div className="feature-shortcut-link">Compare Countries &rarr;</div>
+              </div>
+
+              <div className="feature-shortcut-card" onClick={() => setActiveTab('records')}>
+                <div className="feature-shortcut-icon">🏆</div>
+                <h4 className="feature-shortcut-title">Legendary Records</h4>
+                <p className="feature-shortcut-text">
+                  Explore a curated timeline of the most iconic, record-shattering athletic achievements in Olympic history.
+                </p>
+                <div className="feature-shortcut-link">View Records &rarr;</div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* TAB 1: OVERALL ANALYSIS */}
         {activeTab === 'overall' && (
