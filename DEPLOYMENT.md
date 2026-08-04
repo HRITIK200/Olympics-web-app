@@ -51,3 +51,32 @@ To add free SSL certificates (HTTPS) in production:
    sudo certbot certonly --standalone -d olympics.yourdomain.com
    ```
 4. Update `docker-compose.yml` to mount the certificate folder, or configure an Nginx proxy on the host machine to terminate SSL and route to local port `80`.
+
+---
+
+## ☁️ Deploying to Railway / Render (Serverless / SaaS)
+
+Since platforms like **Railway** and **Render** build containers independently and don't natively support host Nginx mapping via Docker Compose in their free tiers, you should deploy the frontend and backend as **two separate web services**:
+
+### 1. Backend Web Service Setup
+1. Create a new Web Service on Railway or Render.
+2. Select your repository.
+3. Configure the following parameters:
+   - **Root Directory**: `backend`
+   - **Runtime**: `Docker`
+   - **Port**: `8001`
+4. Copy the public URL provided by the platform (e.g., `https://olympics-backend.up.railway.app` or `https://olympics-backend.onrender.com`).
+
+### 2. Frontend Static / Web Service Setup
+1. Create a new Static Site (or Web Service) on Railway or Render.
+2. Select your repository.
+3. Configure the following parameters:
+   - **Root Directory**: `frontend`
+   - **Build Command**: `npm run build`
+   - **Publish Directory / Output Folder**: `dist`
+4. Add an **Environment Variable**:
+   - Key: `VITE_API_BASE`
+   - Value: `<YOUR_BACKEND_PUBLIC_URL>` (Paste the URL copied from the backend service step)
+
+This separates static file rendering from python computing, guaranteeing 100% build success on serverless cloud platforms.
+
