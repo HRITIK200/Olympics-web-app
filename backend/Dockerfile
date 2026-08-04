@@ -19,5 +19,5 @@ COPY . .
 # Expose backend API port
 EXPOSE 8001
 
-# Command to boot Uvicorn server
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001"]
+# Command to boot Uvicorn server dynamically reading allocated system ports
+CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-8001}
