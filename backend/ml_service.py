@@ -50,20 +50,18 @@ class MLService:
     def train_predictor(self):
         db = SessionLocal()
         try:
-            # 1. Fetch historical medal tallies grouped by region and year
-            # We deduplicate rows by event matching fetch_medal_tally logic
-            distinct_sql = """
-                SELECT DISTINCT team, noc, games, year, city, sport, event, medal, gold, silver, bronze
-                FROM athlete_events
-            """
-            
-            medals_sql = f"""
-                WITH de AS ({distinct_sql})
-                SELECT nr.region as country, de.year as year, 
-                       SUM(de.gold) as gold, SUM(de.silver) as silver, SUM(de.bronze) as bronze
-                FROM de
-                JOIN noc_regions nr ON de.noc = nr.noc
-                GROUP BY nr.region, de.year
+            # 1. Fetch historical medal tallies grouped by region and year (from 1980 onwards for memory efficiency)
+            medals_sql = """
+                WITH unique_medals AS (
+                    SELECT DISTINCT year, noc, sport, event, medal, gold, silver, bronze
+                    FROM athlete_events
+                    WHERE year >= 1980
+                )
+                SELECT nr.region as country, u.year as year, 
+                       SUM(u.gold) as gold, SUM(u.silver) as silver, SUM(u.bronze) as bronze
+                FROM unique_medals u
+                JOIN noc_regions nr ON u.noc = nr.noc
+                GROUP BY nr.region, u.year
             """
             medals_df = pd.read_sql_query(medals_sql, con=db.bind)
             medals_df.dropna(subset=['country'], inplace=True)
@@ -74,6 +72,7 @@ class MLService:
                 SELECT nr.region as country, ae.year as year, COUNT(DISTINCT ae.name) as athletes
                 FROM athlete_events ae
                 JOIN noc_regions nr ON ae.noc = nr.noc
+                WHERE ae.year >= 1980
                 GROUP BY nr.region, ae.year
             """
             athletes_df = pd.read_sql_query(athletes_sql, con=db.bind)
