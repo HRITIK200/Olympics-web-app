@@ -1408,3 +1408,89 @@ body {
 .feature-shortcut-card:hover .feature-shortcut-link {
   color: var(--secondary);
 }
+
+/* ==========================================================================
+   ADVANCED RESPONSIVENESS OVERRIDES (EVERY DEVICE READY)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .sidebar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+    padding: 1.5rem 1.25rem;
+  }
+  .sidebar-logo {
+    justify-content: center;
+  }
+  .nav-links {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    gap: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+  .nav-links::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+  .nav-item {
+    flex: 0 0 auto;
+    padding: 0.55rem 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.3rem;
+  }
+  .hero-section {
+    padding: 3rem 1.5rem;
+  }
+  .home-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.85rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.75rem;
+  }
+  .hero-section {
+    padding: 2.25rem 1rem;
+  }
+  .home-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+  .podium-box {
+    gap: 0.4rem;
+    height: 155px;
+  }
+  .podium-col {
+    width: 80px;
+    padding: 0.5rem 0.25rem;
+  }
+  .podium-col.rank-1 { height: 135px; }
+  .podium-col.rank-2 { height: 110px; }
+  .podium-col.rank-3 { height: 90px; }
+  .podium-country { font-size: 0.75rem; }
+  
+  /* Chat widget width safety constraints */
+  .chat-window {
+    width: calc(100vw - 40px);
+    height: 420px;
+  }
+  .chat-bubble {
+    max-width: 90%;
+  }
+}
+
