@@ -21,29 +21,37 @@ class DataService:
             count = db.query(AthleteEvent).count()
             if count == 0:
                 print("SQL Database is empty. Loading records from CSV...")
+                import gc
                 
                 # Load regions
                 region_df = pd.read_csv(noc_path)
                 region_df.columns = [c.lower() for c in region_df.columns]
                 region_df.to_sql('noc_regions', con=engine, if_exists='append', index=False)
+                del region_df
+                gc.collect()
                 
-                # Load athletes & events
-                raw_df = pd.read_csv(csv_path)
-                raw_df = raw_df[raw_df['Season'] == 'Summer']
-                raw_df.drop_duplicates(inplace=True)
-                
-                # Align column names to models
-                raw_df.columns = [
-                    'athlete_id' if c == 'ID' else c.lower() 
-                    for c in raw_df.columns
-                ]
-                
-                # Pre-calculate medal values
-                raw_df['gold'] = (raw_df['medal'] == 'Gold').astype(int)
-                raw_df['silver'] = (raw_df['medal'] == 'Silver').astype(int)
-                raw_df['bronze'] = (raw_df['medal'] == 'Bronze').astype(int)
-                
-                raw_df.to_sql('athlete_events', con=engine, if_exists='append', index=False)
+                # Load athletes & events in chunks to minimize memory footprint (< 120MB RAM)
+                chunk_size = 25000
+                for chunk in pd.read_csv(csv_path, chunksize=chunk_size):
+                    chunk = chunk[chunk['Season'] == 'Summer']
+                    if chunk.empty:
+                        continue
+                    chunk.drop_duplicates(inplace=True)
+                    
+                    # Align column names to models
+                    chunk.columns = [
+                        'athlete_id' if c == 'ID' else c.lower() 
+                        for c in chunk.columns
+                    ]
+                    
+                    # Pre-calculate medal values
+                    chunk['gold'] = (chunk['medal'] == 'Gold').astype(int)
+                    chunk['silver'] = (chunk['medal'] == 'Silver').astype(int)
+                    chunk['bronze'] = (chunk['medal'] == 'Bronze').astype(int)
+                    
+                    chunk.to_sql('athlete_events', con=engine, if_exists='append', index=False)
+                    del chunk
+                    gc.collect()
                 print("Database populated successfully.")
             else:
                 print(f"Database verified. Loaded: {count} event entries.")
