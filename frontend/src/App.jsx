@@ -5,7 +5,23 @@ import {
   Users, 
   TrendingUp, 
   Search,
-  Home
+  Home,
+  Sparkles,
+  Database,
+  ArrowRight,
+  Zap,
+  Award,
+  Sliders,
+  RefreshCw,
+  Trash2,
+  Calendar,
+  MapPin,
+  Target,
+  ChevronRight,
+  Download,
+  BarChart2,
+  Check,
+  Copy
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -129,6 +145,7 @@ function App() {
   const [selectedCityName, setSelectedCityName] = useState('Paris'); // default active selected city
   const [selectedCityDetails, setSelectedCityDetails] = useState(null);
   const [cityDetailsLoading, setCityDetailsLoading] = useState(false);
+  const [hostFilter, setHostFilter] = useState('');
 
   // Tab: Medal Tally states
   const [medalTally, setMedalTally] = useState([]);
@@ -375,15 +392,37 @@ function App() {
     return 'cell-level-4';
   };
 
+  // Tab metadata for top breadcrumbs
+  const getTabMeta = (tab) => {
+    switch (tab) {
+      case 'home': return { category: 'Platform Overview', title: 'Executive Overview' };
+      case 'overall': return { category: 'Core Analytics', title: 'Overall Historical Trends' };
+      case 'tally': return { category: 'Performance', title: 'Medal Tally Standings' };
+      case 'country': return { category: 'National Intelligence', title: 'Country-wise Analytics' };
+      case 'comparison': return { category: 'Benchmarking', title: 'Head-to-Head Comparison' };
+      case 'predictor': return { category: 'Machine Learning', title: 'LA 2028 Medal Predictor' };
+      case 'records': return { category: 'Hall of Fame', title: 'Legendary Records' };
+      case 'athlete': return { category: 'Biometrics', title: 'Athlete Physical Profile' };
+      default: return { category: 'Intelligence', title: 'Analytics Dashboard' };
+    }
+  };
+
   return (
     <div className="app-container">
       {/* Glassmorphic Sidebar */}
       <nav className="sidebar">
         <div className="sidebar-logo">
-          <Trophy size={32} color="#8b5cf6" />
-          <h1>Olympics Vault</h1>
+          <div className="logo-icon-wrap">
+            <Trophy size={22} color="#fff" />
+          </div>
+          <div className="sidebar-logo-text">
+            <h1>Olympics Vault</h1>
+            <span className="sidebar-version-tag">v2.4 Enterprise</span>
+          </div>
         </div>
+
         <ul className="nav-links">
+          <li className="nav-group-label">Platform Core</li>
           <li 
             className={`nav-item ${activeTab === 'home' ? 'active' : ''}`}
             onClick={() => setActiveTab('home')}
@@ -405,6 +444,8 @@ function App() {
             <Trophy />
             <span>Medal Tally</span>
           </li>
+
+          <li className="nav-group-label">Intelligence & ML</li>
           <li 
             className={`nav-item ${activeTab === 'country' ? 'active' : ''}`}
             onClick={() => setActiveTab('country')}
@@ -416,21 +457,23 @@ function App() {
             className={`nav-item ${activeTab === 'comparison' ? 'active' : ''}`}
             onClick={() => setActiveTab('comparison')}
           >
-            <Globe />
+            <Target />
             <span>Country Comparison</span>
           </li>
           <li 
             className={`nav-item ${activeTab === 'predictor' ? 'active' : ''}`}
             onClick={() => setActiveTab('predictor')}
           >
-            <TrendingUp />
+            <Sliders />
             <span>Medal Predictor</span>
           </li>
+
+          <li className="nav-group-label">Historical Vault</li>
           <li 
             className={`nav-item ${activeTab === 'records' ? 'active' : ''}`}
             onClick={() => setActiveTab('records')}
           >
-            <Trophy />
+            <Award />
             <span>Legendary Records</span>
           </li>
           <li 
@@ -441,25 +484,71 @@ function App() {
             <span>Athlete Profile</span>
           </li>
         </ul>
+
+        {/* Sidebar Footer AI Assistant Teaser */}
+        <div className="sidebar-footer-card" onClick={() => setChatOpen(true)}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.25rem' }}>
+            <Sparkles size={16} color="#c084fc" />
+            <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#fff' }}>Olympics Oracle AI</span>
+          </div>
+          <p style={{ fontSize: '0.73rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+            Offline Text-to-SQL engine. Ask historical questions in natural language.
+          </p>
+        </div>
       </nav>
 
       {/* Main Panel Content */}
       <main className="main-content">
 
+        {/* Top Command Bar & Status Header */}
+        <header className="top-bar">
+          <div className="breadcrumb-nav">
+            <span>Olympics Vault</span>
+            <ChevronRight size={13} color="#64748b" />
+            <span>{getTabMeta(activeTab).category}</span>
+            <ChevronRight size={13} color="#64748b" />
+            <span className="current-crumb">{getTabMeta(activeTab).title}</span>
+          </div>
+
+          <div className="top-bar-actions">
+            <div className="status-badge-live">
+              <span className="status-dot-pulse"></span>
+              <span>SQLite Online (270k+ Events)</span>
+            </div>
+
+            <button 
+              className="quick-action-btn"
+              onClick={() => setChatOpen(!chatOpen)}
+              title="Toggle Olympics Oracle AI Assistant"
+            >
+              <Sparkles size={13} color="#c084fc" />
+              <span>AI Oracle</span>
+            </button>
+          </div>
+        </header>
+
         {/* TAB 0: HOME LANDING PAGE */}
         {activeTab === 'home' && (
           <div className="tab-pane">
             <div className="hero-section">
+              <div className="hero-badge-pill">
+                <Sparkles size={14} />
+                <span>Next-Gen Olympic Intelligence & Predictive ML</span>
+              </div>
               <h2 className="hero-title">Olympics Vault</h2>
               <p className="hero-subtitle">
                 An advanced database indexing and predictive analysis suite mapping 120+ years of Summer Olympic history. Explore dynamic rosters, test forecasting models, and query statistics via natural language.
               </p>
               <div className="hero-buttons">
                 <button className="cta-button primary" onClick={() => setActiveTab('overall')}>
-                  Explore Analytics &rarr;
+                  <BarChart2 size={18} />
+                  <span>Explore Analytics</span>
+                  <ArrowRight size={16} />
                 </button>
                 <button className="cta-button secondary" onClick={() => setActiveTab('predictor')}>
-                  Try ML Predictor &rarr;
+                  <Sliders size={18} />
+                  <span>Run ML Predictor</span>
+                  <ArrowRight size={16} />
                 </button>
               </div>
             </div>
@@ -467,20 +556,28 @@ function App() {
             {/* Achievements Stats Grid */}
             <div className="home-stats-grid">
               <div className="home-stat-card">
+                <div className="home-stat-icon-wrap"><Calendar size={20} /></div>
                 <div className="home-stat-val">30</div>
                 <div className="home-stat-lbl">Summer Editions</div>
+                <div className="home-stat-sub">1896 Athens – 2024 Paris</div>
               </div>
               <div className="home-stat-card">
+                <div className="home-stat-icon-wrap"><Globe size={20} /></div>
                 <div className="home-stat-val">207</div>
                 <div className="home-stat-lbl">Countries Mapped</div>
+                <div className="home-stat-sub">National Olympic Committees</div>
               </div>
               <div className="home-stat-card">
+                <div className="home-stat-icon-wrap"><Users size={20} /></div>
                 <div className="home-stat-val">150K+</div>
                 <div className="home-stat-lbl">Athletes Indexed</div>
+                <div className="home-stat-sub">Biometrics & Event History</div>
               </div>
               <div className="home-stat-card">
+                <div className="home-stat-icon-wrap"><Award size={20} /></div>
                 <div className="home-stat-val">39K+</div>
                 <div className="home-stat-lbl">Medals Tracked</div>
+                <div className="home-stat-sub">Gold, Silver & Bronze Records</div>
               </div>
             </div>
 
@@ -490,39 +587,51 @@ function App() {
             
             <div className="feature-shortcuts-grid">
               <div className="feature-shortcut-card" onClick={() => setActiveTab('predictor')}>
-                <div className="feature-shortcut-icon">📈</div>
-                <h4 className="feature-shortcut-title">LA 2028 Predictor</h4>
+                <div className="feature-shortcut-icon"><Sliders size={22} /></div>
+                <h4 className="feature-shortcut-title">LA 2028 ML Predictor</h4>
                 <p className="feature-shortcut-text">
                   Test a machine learning RandomForest model forecasting total medal distributions based on delegation size, historical metrics, and host advantages.
                 </p>
-                <div className="feature-shortcut-link">Open Predictor &rarr;</div>
+                <div className="feature-shortcut-link">
+                  <span>Open Predictor</span>
+                  <ArrowRight size={14} />
+                </div>
               </div>
 
               <div className="feature-shortcut-card" onClick={() => setActiveTab('overall')}>
-                <div className="feature-shortcut-icon">📊</div>
+                <div className="feature-shortcut-icon"><BarChart2 size={22} /></div>
                 <h4 className="feature-shortcut-title">Interactive Host Standings</h4>
                 <p className="feature-shortcut-text">
                   Browse custom profiles, participation levels, and top country standings across all historic summer host cities.
                 </p>
-                <div className="feature-shortcut-link">Open Host Profile &rarr;</div>
+                <div className="feature-shortcut-link">
+                  <span>Open Host Profile</span>
+                  <ArrowRight size={14} />
+                </div>
               </div>
 
               <div className="feature-shortcut-card" onClick={() => setActiveTab('comparison')}>
-                <div className="feature-shortcut-icon">👥</div>
-                <h4 className="feature-shortcut-title">Country Comparison</h4>
+                <div className="feature-shortcut-icon"><Globe size={22} /></div>
+                <h4 className="feature-shortcut-title">Country Benchmarking</h4>
                 <p className="feature-shortcut-text">
                   Benchmark physical attributes (height, weight, age) and medal output of competing delegations side-by-side.
                 </p>
-                <div className="feature-shortcut-link">Compare Countries &rarr;</div>
+                <div className="feature-shortcut-link">
+                  <span>Compare Countries</span>
+                  <ArrowRight size={14} />
+                </div>
               </div>
 
               <div className="feature-shortcut-card" onClick={() => setActiveTab('records')}>
-                <div className="feature-shortcut-icon">🏆</div>
+                <div className="feature-shortcut-icon"><Trophy size={22} /></div>
                 <h4 className="feature-shortcut-title">Legendary Records</h4>
                 <p className="feature-shortcut-text">
                   Explore a curated timeline of the most iconic, record-shattering athletic achievements in Olympic history.
                 </p>
-                <div className="feature-shortcut-link">View Records &rarr;</div>
+                <div className="feature-shortcut-link">
+                  <span>View Records</span>
+                  <ArrowRight size={14} />
+                </div>
               </div>
             </div>
           </div>
@@ -558,41 +667,71 @@ function App() {
                 {overallStats && (
                   <div className="stats-grid">
                     <div className="stat-card">
+                      <div className="stat-card-icon-wrap"><Calendar size={20} /></div>
                       <span className="stat-value">{overallStats.editions}</span>
                       <span className="stat-label">Editions</span>
+                      <span className="stat-subtext">1896 – 2024 Games</span>
                     </div>
                     <div className="stat-card">
+                      <div className="stat-card-icon-wrap"><MapPin size={20} /></div>
                       <span className="stat-value">{overallStats.hosts}</span>
                       <span className="stat-label">Host Cities</span>
+                      <span className="stat-subtext">Global Host Metropolises</span>
                     </div>
                     <div className="stat-card">
+                      <div className="stat-card-icon-wrap"><Zap size={20} /></div>
                       <span className="stat-value">{overallStats.sports}</span>
                       <span className="stat-label">Sports</span>
+                      <span className="stat-subtext">Summer Disciplines</span>
                     </div>
                     <div className="stat-card">
+                      <div className="stat-card-icon-wrap"><Target size={20} /></div>
                       <span className="stat-value">{overallStats.events}</span>
                       <span className="stat-label">Events</span>
+                      <span className="stat-subtext">Competitive Categories</span>
                     </div>
                     <div className="stat-card">
+                      <div className="stat-card-icon-wrap"><Globe size={20} /></div>
                       <span className="stat-value">{overallStats.nations}</span>
                       <span className="stat-label">Nations</span>
+                      <span className="stat-subtext">National Olympic Delegations</span>
                     </div>
                     <div className="stat-card">
+                      <div className="stat-card-icon-wrap"><Users size={20} /></div>
                       <span className="stat-value">{overallStats.athletes.toLocaleString()}</span>
                       <span className="stat-label">Athletes</span>
+                      <span className="stat-subtext">Complete Indexed Rosters</span>
                     </div>
                   </div>
                 )}
 
                 {/* Premium Interactive Host City Gallery */}
                 <div className="glass-card">
-                  <h3>Historical Olympic Host Cities</h3>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                    Select a host city to query its historical games participation, delegation size, and top country standings from the SQLite database.
-                  </p>
+                  <div className="flex-between" style={{ marginBottom: '1rem', alignItems: 'flex-start' }}>
+                    <div>
+                      <h3>Historical Olympic Host Cities</h3>
+                      <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+                        Select a host city to query its historical games participation, delegation size, and top country standings from the SQLite database.
+                      </p>
+                    </div>
+                    <div style={{ position: 'relative', width: '250px' }}>
+                      <input 
+                        type="text"
+                        placeholder="Search city or country..."
+                        value={hostFilter}
+                        onChange={(e) => setHostFilter(e.target.value)}
+                        className="search-input"
+                        style={{ width: '100%', padding: '0.55rem 0.85rem 0.55rem 2.2rem', fontSize: '0.85rem' }}
+                      />
+                      <Search size={14} color="#94a3b8" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
+                    </div>
+                  </div>
                   
                   <div className="host-city-grid">
-                    {HOST_CITIES.map((city, idx) => (
+                    {HOST_CITIES.filter(c => 
+                      c.name.toLowerCase().includes(hostFilter.toLowerCase()) || 
+                      c.country.toLowerCase().includes(hostFilter.toLowerCase())
+                    ).map((city, idx) => (
                       <div 
                         key={idx} 
                         className={`host-city-card ${selectedCityName === city.name ? 'active' : ''}`}
@@ -1639,28 +1778,40 @@ function App() {
       <div className="chat-widget-container">
         {chatOpen && (
           <div className="chat-window">
-            <div className="chat-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <Trophy size={20} color="#8b5cf6" />
-                <h3>Olympics Oracle</h3>
+            <div className="chat-header">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                <div className="stat-card-icon-wrap" style={{ width: 32, height: 32, margin: 0, borderRadius: 8 }}>
+                  <Sparkles size={16} color="#c084fc" />
+                </div>
+                <div>
+                  <h3 style={{ fontSize: '0.98rem', fontWeight: 800, margin: 0 }}>Olympics Oracle AI</h3>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '2px' }}>
+                    <span className="status-dot-pulse" style={{ width: 6, height: 6 }}></span>
+                    <span style={{ fontSize: '0.72rem', color: '#34d399', fontWeight: 600 }}>SQLite Agent Ready</span>
+                  </div>
+                </div>
               </div>
               <button 
                 onClick={clearChat}
                 style={{ 
                   background: 'rgba(239, 68, 68, 0.1)', 
-                  border: '1px solid rgba(239, 68, 68, 0.2)', 
-                  color: '#ef4444', 
-                  fontSize: '0.75rem', 
-                  padding: '4px 8px', 
+                  border: '1px solid rgba(239, 68, 68, 0.25)', 
+                  color: '#f87171', 
+                  fontSize: '0.72rem', 
+                  padding: '4px 10px', 
                   borderRadius: '6px', 
                   cursor: 'pointer',
                   fontWeight: 600,
-                  transition: 'var(--transition-smooth)'
+                  transition: 'var(--transition-smooth)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.3rem'
                 }}
                 onMouseEnter={(e) => e.target.style.background = 'rgba(239, 68, 68, 0.2)'}
                 onMouseLeave={(e) => e.target.style.background = 'rgba(239, 68, 68, 0.1)'}
               >
-                Clear Chat
+                <Trash2 size={12} />
+                <span>Clear</span>
               </button>
             </div>
             
@@ -1684,9 +1835,9 @@ function App() {
               ))}
               {chatLoading && (
                 <div className="chat-bubble oracle">
-                  <div style={{ display: 'flex', gap: '4px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <span className="spinner" style={{ width: 14, height: 14, borderWidth: 2 }}></span>
-                    Searching local SQLite database...
+                    <span style={{ fontSize: '0.85rem' }}>Compiling SQL query & scanning records...</span>
                   </div>
                 </div>
               )}
@@ -1695,31 +1846,31 @@ function App() {
 
             {/* Quick chips suggestions */}
             <div className="chat-suggestions">
-              <div className="chat-suggestion-chip" onClick={() => setChatInput("Predict medals for India in 2028")}>Predict India 2028</div>
-              <div className="chat-suggestion-chip" onClick={() => setChatInput("Who is the most decorated swimmer?")}>Top Swimmer</div>
-              <div className="chat-suggestion-chip" onClick={() => setChatInput("How many medals did China win in 2008?")}>China 2008</div>
-              <div className="chat-suggestion-chip" onClick={() => setChatInput("What was the average age of competitors in 2016?")}>Avg Age 2016</div>
+              <div className="chat-suggestion-chip" onClick={() => setChatInput("Predict medals for India in 2028")}>📈 Predict India 2028</div>
+              <div className="chat-suggestion-chip" onClick={() => setChatInput("Who is the most decorated swimmer?")}>🏊 Top Swimmer</div>
+              <div className="chat-suggestion-chip" onClick={() => setChatInput("How many medals did China win in 2008?")}>🇨🇳 China 2008</div>
+              <div className="chat-suggestion-chip" onClick={() => setChatInput("What was the average age of competitors in 2016?")}>📊 Avg Age 2016</div>
             </div>
 
             {/* Chat Input form */}
             <form className="chat-input-area" onSubmit={handleChatSubmit}>
               <input
                 type="text"
-                placeholder="Ask the Oracle..."
+                placeholder="Ask e.g. USA swimmers height in 2016..."
                 className="chat-input-text"
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
               />
-              <button type="submit" className="btn-send">
-                &rarr;
+              <button type="submit" className="btn-send" title="Send Query">
+                <ArrowRight size={18} />
               </button>
             </form>
           </div>
         )}
 
         {/* Toggle Button */}
-        <div className="chat-button" onClick={() => setChatOpen(!chatOpen)}>
-          <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>💬</span>
+        <div className="chat-button" onClick={() => setChatOpen(!chatOpen)} title="Olympics Oracle Chatbot">
+          <Sparkles size={24} color="#ffffff" />
         </div>
       </div>
 
