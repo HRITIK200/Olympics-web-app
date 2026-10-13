@@ -184,7 +184,7 @@ function App() {
   const [chatInput, setChatInput] = useState('');
   const [chatLoading, setChatLoading] = useState(false);
   const [chatMessages, setChatMessages] = useState([
-    { sender: 'oracle', text: "Hello! I am the **Olympics Oracle** database agent. Ask me historical stats or ML forecasts!" }
+    { sender: 'oracle', text: "Hello! I am the **Olympics Oracle** research assistant. Ask me historical stats, standings, or future forecasts!" }
   ]);
   const chatBottomRef = useRef(null);
 
@@ -372,7 +372,7 @@ function App() {
   // Clear/Reset chatbot thread
   const clearChat = () => {
     setChatMessages([
-      { sender: 'oracle', text: "Hello! I am the **Olympics Oracle** database agent. Ask me historical stats or ML forecasts!" }
+      { sender: 'oracle', text: "Hello! I am the **Olympics Oracle** research assistant. Ask me historical stats, standings, or future forecasts!" }
     ]);
   };
 
@@ -400,7 +400,7 @@ function App() {
       case 'tally': return { category: 'Performance', title: 'Medal Tally Standings' };
       case 'country': return { category: 'National Intelligence', title: 'Country-wise Analytics' };
       case 'comparison': return { category: 'Benchmarking', title: 'Head-to-Head Comparison' };
-      case 'predictor': return { category: 'Machine Learning', title: 'LA 2028 Medal Predictor' };
+      case 'predictor': return { category: 'Forecasting Engine', title: 'LA 2028 Medal Predictor' };
       case 'records': return { category: 'Hall of Fame', title: 'Legendary Records' };
       case 'athlete': return { category: 'Biometrics', title: 'Athlete Physical Profile' };
       default: return { category: 'Intelligence', title: 'Analytics Dashboard' };
@@ -417,7 +417,7 @@ function App() {
           </div>
           <div className="sidebar-logo-text">
             <h1>Olympics Vault</h1>
-            <span className="sidebar-version-tag">v2.4 Enterprise</span>
+            <span className="sidebar-version-tag">Global Vault Edition</span>
           </div>
         </div>
 
@@ -445,7 +445,7 @@ function App() {
             <span>Medal Tally</span>
           </li>
 
-          <li className="nav-group-label">Intelligence & ML</li>
+          <li className="nav-group-label">Intelligence & Forecasts</li>
           <li 
             className={`nav-item ${activeTab === 'country' ? 'active' : ''}`}
             onClick={() => setActiveTab('country')}
@@ -489,10 +489,10 @@ function App() {
         <div className="sidebar-footer-card" onClick={() => setChatOpen(true)}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.25rem' }}>
             <Sparkles size={16} color="#c084fc" />
-            <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#fff' }}>Olympics Oracle AI</span>
+            <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#fff' }}>Olympics Oracle</span>
           </div>
           <p style={{ fontSize: '0.73rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
-            Offline Text-to-SQL engine. Ask historical questions in natural language.
+            Interactive research assistant. Ask historical questions in natural language.
           </p>
         </div>
       </nav>
@@ -513,16 +513,16 @@ function App() {
           <div className="top-bar-actions">
             <div className="status-badge-live">
               <span className="status-dot-pulse"></span>
-              <span>SQLite Online (270k+ Events)</span>
+              <span>Database Connected (270k+ Records)</span>
             </div>
 
             <button 
               className="quick-action-btn"
               onClick={() => setChatOpen(!chatOpen)}
-              title="Toggle Olympics Oracle AI Assistant"
+              title="Toggle Olympics Oracle Assistant"
             >
               <Sparkles size={13} color="#c084fc" />
-              <span>AI Oracle</span>
+              <span>Oracle Assistant</span>
             </button>
           </div>
         </header>
@@ -533,7 +533,7 @@ function App() {
             <div className="hero-section">
               <div className="hero-badge-pill">
                 <Sparkles size={14} />
-                <span>Next-Gen Olympic Intelligence & Predictive ML</span>
+                <span>Global Olympic Intelligence & Future Forecasting</span>
               </div>
               <h2 className="hero-title">Olympics Vault</h2>
               <p className="hero-subtitle">
@@ -547,7 +547,7 @@ function App() {
                 </button>
                 <button className="cta-button secondary" onClick={() => setActiveTab('predictor')}>
                   <Sliders size={18} />
-                  <span>Run ML Predictor</span>
+                  <span>Run Future Predictor</span>
                   <ArrowRight size={16} />
                 </button>
               </div>
@@ -588,9 +588,9 @@ function App() {
             <div className="feature-shortcuts-grid">
               <div className="feature-shortcut-card" onClick={() => setActiveTab('predictor')}>
                 <div className="feature-shortcut-icon"><Sliders size={22} /></div>
-                <h4 className="feature-shortcut-title">LA 2028 ML Predictor</h4>
+                <h4 className="feature-shortcut-title">LA 2028 Medal Predictor</h4>
                 <p className="feature-shortcut-text">
-                  Test a machine learning RandomForest model forecasting total medal distributions based on delegation size, historical metrics, and host advantages.
+                  Simulate upcoming medal distribution forecasts based on delegation size, historical performance, and host nation advantage.
                 </p>
                 <div className="feature-shortcut-link">
                   <span>Open Predictor</span>
@@ -711,7 +711,7 @@ function App() {
                     <div>
                       <h3>Historical Olympic Host Cities</h3>
                       <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                        Select a host city to query its historical games participation, delegation size, and top country standings from the SQLite database.
+                        Select a host city to view historical games participation, delegation size, and top country standings.
                       </p>
                     </div>
                     <div style={{ position: 'relative', width: '250px' }}>
@@ -750,7 +750,7 @@ function App() {
                       <div className="host-drawer-header">
                         <h4>📊 Host City Standings: {selectedCityName}</h4>
                         <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                          SQLite query results detailing edition-specific total metrics and the official Top 3 country standing podium.
+                          Detailed edition-specific total metrics and the official Top 3 country standing podium.
                         </p>
                       </div>
 
@@ -1464,7 +1464,7 @@ function App() {
           <div className="tab-pane">
             <div className="header">
               <h2>LA 2028 & Future Medal Predictor</h2>
-              <p>Harness the power of a trained RandomForest ML model to predict medal counts based on previous performance and delegations.</p>
+              <p>Simulate projected medal counts for upcoming Olympic Games based on historical performance, delegation momentum, and host status.</p>
             </div>
 
             <div className="glass-card">
@@ -1494,7 +1494,7 @@ function App() {
                   </select>
                 </div>
 
-                {/* Dynamic ML Delegation Slider */}
+                {/* Delegation Size Adjustment Slider */}
                 <div className="form-group">
                   <label>Delegation Size: {delegationOverride || (predictData && predictData.features_used.athletes_estimate) || 50} Athletes</label>
                   <input 
@@ -1511,7 +1511,7 @@ function App() {
               {predictLoading ? (
                 <div className="loader-container">
                   <div className="spinner"></div>
-                  <p>Running RandomForest Regression on historical Olympics Vault datasets...</p>
+                  <p>Calculating projected outcomes across historical Olympic datasets...</p>
                 </div>
               ) : predictData ? (
                 <div>
@@ -1528,7 +1528,7 @@ function App() {
                         </h4>
                         <div className="prediction-big-badge">{predictData.total}</div>
                         <p style={{ fontWeight: 600, color: 'var(--secondary)' }}>
-                          Model Confidence: {predictData.confidence}%
+                          Forecast Confidence: {predictData.confidence}%
                         </p>
                       </div>
 
@@ -1556,7 +1556,7 @@ function App() {
                           </div>
                         </div>
 
-                        <h4 style={{ borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '1.5rem' }}>Features Ingested into RF Model</h4>
+                        <h4 style={{ borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '1.5rem' }}>Key Factors Influencing Projections</h4>
                         <ul className="prediction-details-list">
                           <li className="prediction-detail-item">
                             <span>Last Edition Medals ({predictYear - 4 === 2024 ? 2024 : predictYear - 8})</span>
@@ -1784,10 +1784,10 @@ function App() {
                   <Sparkles size={16} color="#c084fc" />
                 </div>
                 <div>
-                  <h3 style={{ fontSize: '0.98rem', fontWeight: 800, margin: 0 }}>Olympics Oracle AI</h3>
+                  <h3 style={{ fontSize: '0.98rem', fontWeight: 800, margin: 0 }}>Olympics Oracle</h3>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '2px' }}>
                     <span className="status-dot-pulse" style={{ width: 6, height: 6 }}></span>
-                    <span style={{ fontSize: '0.72rem', color: '#34d399', fontWeight: 600 }}>SQLite Agent Ready</span>
+                    <span style={{ fontSize: '0.72rem', color: '#34d399', fontWeight: 600 }}>Assistant Active</span>
                   </div>
                 </div>
               </div>
@@ -1837,7 +1837,7 @@ function App() {
                 <div className="chat-bubble oracle">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <span className="spinner" style={{ width: 14, height: 14, borderWidth: 2 }}></span>
-                    <span style={{ fontSize: '0.85rem' }}>Compiling SQL query & scanning records...</span>
+                    <span style={{ fontSize: '0.85rem' }}>Searching historical vault records...</span>
                   </div>
                 </div>
               )}

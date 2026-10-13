@@ -358,11 +358,11 @@ class ChatService:
 
         # 4. Fallback default response
         return (
-            f"👋 Hello! I am the **Olympics Vault Oracle**, a local Text-to-SQL compiler engine.\n\n"
-            f"I dynamically parse your queries to retrieve records from the SQLite database. Ask me:\n"
+            f"👋 Hello! I am the **Olympics Vault Oracle**, your historical research assistant.\n\n"
+            f"I search across 120+ years of Summer Olympic records to answer your questions. You can ask:\n"
             f"- *'How many gold medals did India win in 2024?'*\n"
             f"- *'What was the average height of USA swimming in 2016?'*\n"
             f"- *'Which city hosted the Olympics in 2000?'*\n"
             f"- *'Who won medals in gymnastics in 2020?'*\n"
-            f"- *'Predict medals for France in 2028'* (runs the ML prediction service)"
+            f"- *'Predict medals for France in 2028'*"
         )
