@@ -555,25 +555,25 @@ function App() {
 
             {/* Achievements Stats Grid */}
             <div className="home-stats-grid">
-              <div className="home-stat-card">
+              <div className="home-stat-card theme-cyan">
                 <div className="home-stat-icon-wrap"><Calendar size={20} /></div>
                 <div className="home-stat-val">30</div>
                 <div className="home-stat-lbl">Summer Editions</div>
                 <div className="home-stat-sub">1896 Athens – 2024 Paris</div>
               </div>
-              <div className="home-stat-card">
+              <div className="home-stat-card theme-emerald">
                 <div className="home-stat-icon-wrap"><Globe size={20} /></div>
                 <div className="home-stat-val">207</div>
                 <div className="home-stat-lbl">Countries Mapped</div>
                 <div className="home-stat-sub">National Olympic Committees</div>
               </div>
-              <div className="home-stat-card">
+              <div className="home-stat-card theme-violet">
                 <div className="home-stat-icon-wrap"><Users size={20} /></div>
                 <div className="home-stat-val">150K+</div>
                 <div className="home-stat-lbl">Athletes Indexed</div>
                 <div className="home-stat-sub">Biometrics & Event History</div>
               </div>
-              <div className="home-stat-card">
+              <div className="home-stat-card theme-amber">
                 <div className="home-stat-icon-wrap"><Award size={20} /></div>
                 <div className="home-stat-val">39K+</div>
                 <div className="home-stat-lbl">Medals Tracked</div>
@@ -666,37 +666,37 @@ function App() {
                 {/* Top Statistics Cards */}
                 {overallStats && (
                   <div className="stats-grid">
-                    <div className="stat-card">
+                    <div className="stat-card theme-cyan">
                       <div className="stat-card-icon-wrap"><Calendar size={20} /></div>
                       <span className="stat-value">{overallStats.editions}</span>
                       <span className="stat-label">Editions</span>
                       <span className="stat-subtext">1896 – 2024 Games</span>
                     </div>
-                    <div className="stat-card">
+                    <div className="stat-card theme-amber">
                       <div className="stat-card-icon-wrap"><MapPin size={20} /></div>
                       <span className="stat-value">{overallStats.hosts}</span>
                       <span className="stat-label">Host Cities</span>
                       <span className="stat-subtext">Global Host Metropolises</span>
                     </div>
-                    <div className="stat-card">
+                    <div className="stat-card theme-orange">
                       <div className="stat-card-icon-wrap"><Zap size={20} /></div>
                       <span className="stat-value">{overallStats.sports}</span>
                       <span className="stat-label">Sports</span>
                       <span className="stat-subtext">Summer Disciplines</span>
                     </div>
-                    <div className="stat-card">
+                    <div className="stat-card theme-rose">
                       <div className="stat-card-icon-wrap"><Target size={20} /></div>
                       <span className="stat-value">{overallStats.events}</span>
                       <span className="stat-label">Events</span>
                       <span className="stat-subtext">Competitive Categories</span>
                     </div>
-                    <div className="stat-card">
+                    <div className="stat-card theme-emerald">
                       <div className="stat-card-icon-wrap"><Globe size={20} /></div>
                       <span className="stat-value">{overallStats.nations}</span>
                       <span className="stat-label">Nations</span>
                       <span className="stat-subtext">National Olympic Delegations</span>
                     </div>
-                    <div className="stat-card">
+                    <div className="stat-card theme-violet">
                       <div className="stat-card-icon-wrap"><Users size={20} /></div>
                       <span className="stat-value">{overallStats.athletes.toLocaleString()}</span>
                       <span className="stat-label">Athletes</span>
@@ -839,7 +839,7 @@ function App() {
                           <Tooltip 
                             contentStyle={{ backgroundColor: '#0f172a', borderColor: 'rgba(255,255,255,0.1)', color: '#f3f4f6' }}
                           />
-                          <Line type="monotone" dataKey="Nations" stroke="#8b5cf6" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 8 }} />
+                          <Line type="monotone" dataKey="Nations" stroke="#38bdf8" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 8 }} />
                         </LineChart>
                       </ResponsiveContainer>
                     </div>
@@ -856,7 +856,7 @@ function App() {
                           <Tooltip 
                             contentStyle={{ backgroundColor: '#0f172a', borderColor: 'rgba(255,255,255,0.1)', color: '#f3f4f6' }}
                           />
-                          <Line type="monotone" dataKey="Events" stroke="#10b981" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 8 }} />
+                          <Line type="monotone" dataKey="Events" stroke="#f43f5e" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 8 }} />
                         </LineChart>
                       </ResponsiveContainer>
                     </div>
@@ -873,7 +873,7 @@ function App() {
                           <Tooltip 
                             contentStyle={{ backgroundColor: '#0f172a', borderColor: 'rgba(255,255,255,0.1)', color: '#f3f4f6' }}
                           />
-                          <Line type="monotone" dataKey="Athletes" stroke="#ec4899" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 8 }} />
+                          <Line type="monotone" dataKey="Athletes" stroke="#a855f7" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 8 }} />
                         </LineChart>
                       </ResponsiveContainer>
                     </div>
@@ -1535,7 +1535,7 @@ function App() {
                       {/* Breakdown and Features used */}
                       <div className="glass-card" style={{ padding: '2rem' }}>
                         <h3>Medal Predictions Breakdown</h3>
-                        <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1.5rem', marginBottom: '2rem', justifyContent: 'space-around' }}>
+                        <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1.5rem', marginBottom: '1.5rem', justifyContent: 'space-around' }}>
                           <div style={{ textAlign: 'center' }}>
                             <div className="medal-badge medal-gold" style={{ width: 45, height: 45, fontSize: '1.2rem', marginBottom: '8px' }}>
                               {predictData.Gold}
@@ -1555,6 +1555,54 @@ function App() {
                             <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600 }}>BRONZE</div>
                           </div>
                         </div>
+
+                        {/* Visual Segmented Medal Distribution Ratio Bar */}
+                        {predictData.total > 0 && (
+                          <div style={{ marginBottom: '1.75rem', background: 'rgba(255, 255, 255, 0.02)', padding: '1rem', borderRadius: '12px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', color: 'var(--text-secondary)', marginBottom: '0.6rem', fontWeight: 600 }}>
+                              <span>Medal Composition Ratio</span>
+                              <span>{predictData.total} Total Medals</span>
+                            </div>
+                            <div style={{
+                              display: 'flex',
+                              height: '10px',
+                              borderRadius: '999px',
+                              overflow: 'hidden',
+                              background: 'rgba(255, 255, 255, 0.08)',
+                              boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.4)'
+                            }}>
+                              <div 
+                                title={`Gold: ${predictData.Gold} (${Math.round((predictData.Gold / predictData.total) * 100)}%)`}
+                                style={{ 
+                                  width: `${(predictData.Gold / predictData.total) * 100}%`,
+                                  background: 'linear-gradient(90deg, #f59e0b, #fbbf24)',
+                                  boxShadow: '0 0 10px rgba(245, 158, 11, 0.4)'
+                                }} 
+                              />
+                              <div 
+                                title={`Silver: ${predictData.Silver} (${Math.round((predictData.Silver / predictData.total) * 100)}%)`}
+                                style={{ 
+                                  width: `${(predictData.Silver / predictData.total) * 100}%`,
+                                  background: 'linear-gradient(90deg, #94a3b8, #cbd5e1)',
+                                  boxShadow: '0 0 10px rgba(203, 213, 225, 0.3)'
+                                }} 
+                              />
+                              <div 
+                                title={`Bronze: ${predictData.Bronze} (${Math.round((predictData.Bronze / predictData.total) * 100)}%)`}
+                                style={{ 
+                                  width: `${(predictData.Bronze / predictData.total) * 100}%`,
+                                  background: 'linear-gradient(90deg, #c2410c, #ea580c)',
+                                  boxShadow: '0 0 10px rgba(234, 88, 12, 0.4)'
+                                }} 
+                              />
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem', fontSize: '0.72rem' }}>
+                              <span style={{ color: '#fbbf24', fontWeight: 600 }}>● {Math.round((predictData.Gold / predictData.total) * 100) || 0}% Gold</span>
+                              <span style={{ color: '#cbd5e1', fontWeight: 600 }}>● {Math.round((predictData.Silver / predictData.total) * 100) || 0}% Silver</span>
+                              <span style={{ color: '#ea580c', fontWeight: 600 }}>● {Math.round((predictData.Bronze / predictData.total) * 100) || 0}% Bronze</span>
+                            </div>
+                          </div>
+                        )}
 
                         <h4 style={{ borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '1.5rem' }}>Key Factors Influencing Projections</h4>
                         <ul className="prediction-details-list">
