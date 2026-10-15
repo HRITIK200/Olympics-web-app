@@ -176,9 +176,6 @@ function App() {
   const [athleteData, setAthleteData] = useState(null);
   const [athleteLoading, setAthleteLoading] = useState(false);
 
-  // Carousel slider state
-  const [carouselIndex, setCarouselIndex] = useState(0);
-
   // Chatbot states
   const [chatOpen, setChatOpen] = useState(false);
   const [chatInput, setChatInput] = useState('');
@@ -1657,10 +1654,10 @@ function App() {
           </div>
         )}
 
-        {/* TAB: LEGENDARY RECORDS */}
+        {/* TAB: LEGENDARY RECORDS (VERTICAL SHOWCASE) */}
         {activeTab === 'records' && (
           <div className="tab-pane">
-            <div className="flex-between" style={{ alignItems: 'flex-end', marginBottom: '2rem' }}>
+            <div className="flex-between" style={{ marginBottom: '1.5rem' }}>
               <div className="header" style={{ marginBottom: 0 }}>
                 <div className="tab-pill-badge theme-amber">
                   <Award size={12} />
@@ -1669,62 +1666,33 @@ function App() {
                 <h2>Legendary Olympic Records</h2>
                 <p>Explore some of the most iconic, record-shattering athletic performances in Summer Olympics history.</p>
               </div>
-              
-              {/* Carousel Controls positioned in header row */}
-              <div style={{ display: 'flex', gap: '0.75rem' }}>
-                <button 
-                  className="carousel-btn"
-                  onClick={() => setCarouselIndex(prev => Math.max(0, prev - 1))}
-                  disabled={carouselIndex === 0}
-                  style={{ width: 40, height: 40 }}
-                >
-                  &larr;
-                </button>
-                <button 
-                  className="carousel-btn"
-                  onClick={() => setCarouselIndex(prev => Math.min(OLYMPIC_RECORDS.length - 3, prev + 1))}
-                  disabled={carouselIndex >= OLYMPIC_RECORDS.length - 3}
-                  style={{ width: 40, height: 40 }}
-                >
-                  &rarr;
-                </button>
-              </div>
             </div>
 
-            <div className="carousel-viewport">
-              <div className="carousel-track" style={{ transform: `translateX(-${carouselIndex * 33.333}%)` }}>
-                {OLYMPIC_RECORDS.map((rec, idx) => (
-                  <div key={idx} className="carousel-card">
-                    {/* Visual Card Header Icon */}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
-                      <div className="carousel-card-subtitle">{rec.subtitle}</div>
-                      <div style={{ padding: '6px', borderRadius: '50%', background: 'rgba(245, 158, 11, 0.15)', border: '1px solid rgba(245, 158, 11, 0.3)' }}>
-                        <Trophy size={16} color="#fbbf24" />
-                      </div>
+            <div className="records-vertical-grid">
+              {OLYMPIC_RECORDS.map((rec, idx) => (
+                <div key={idx} className="record-vertical-card">
+                  <div className="record-card-header">
+                    <span className="record-tag-pill">{rec.subtitle}</span>
+                    <div className="record-trophy-pill">
+                      <Trophy size={18} />
                     </div>
-
-                    <div className="carousel-card-title">{rec.title}</div>
-                    
-                    <div style={{ 
-                      background: 'rgba(255,255,255,0.02)', 
-                      border: '1px solid rgba(245, 158, 11, 0.3)', 
-                      borderRadius: '8px', 
-                      padding: '0.5rem 0.75rem', 
-                      color: '#fbbf24', 
-                      fontWeight: 800, 
-                      fontSize: '0.9rem', 
-                      display: 'inline-block',
-                      margin: '0.5rem 0 1.25rem 0' 
-                    }}>
-                      ⭐ {rec.highlight}
-                    </div>
-
-                    <div style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)', margin: '0.5rem 0 1rem 0' }}></div>
-                    
-                    <p className="carousel-card-text">{rec.desc}</p>
                   </div>
-                ))}
-              </div>
+
+                  <h3 className="record-card-title">{rec.title}</h3>
+                  
+                  <div className="record-highlight-badge">
+                    <span>⭐</span>
+                    <span>{rec.highlight}</span>
+                  </div>
+
+                  <p className="record-card-text">{rec.desc}</p>
+
+                  <div className="record-card-footer">
+                    <span>Olympic All-Time Milestone</span>
+                    <span>#0{idx + 1}</span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         )}
