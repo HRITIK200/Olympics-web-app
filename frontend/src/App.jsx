@@ -424,21 +424,21 @@ function App() {
         <ul className="nav-links">
           <li className="nav-group-label">Platform Core</li>
           <li 
-            className={`nav-item ${activeTab === 'home' ? 'active' : ''}`}
+            className={`nav-item nav-home ${activeTab === 'home' ? 'active' : ''}`}
             onClick={() => setActiveTab('home')}
           >
             <Home />
             <span>Home</span>
           </li>
           <li 
-            className={`nav-item ${activeTab === 'overall' ? 'active' : ''}`}
+            className={`nav-item nav-overall ${activeTab === 'overall' ? 'active' : ''}`}
             onClick={() => setActiveTab('overall')}
           >
             <TrendingUp />
             <span>Overall Analysis</span>
           </li>
           <li 
-            className={`nav-item ${activeTab === 'tally' ? 'active' : ''}`}
+            className={`nav-item nav-tally ${activeTab === 'tally' ? 'active' : ''}`}
             onClick={() => setActiveTab('tally')}
           >
             <Trophy />
@@ -447,21 +447,21 @@ function App() {
 
           <li className="nav-group-label">Intelligence & Forecasts</li>
           <li 
-            className={`nav-item ${activeTab === 'country' ? 'active' : ''}`}
+            className={`nav-item nav-country ${activeTab === 'country' ? 'active' : ''}`}
             onClick={() => setActiveTab('country')}
           >
             <Globe />
             <span>Country-wise</span>
           </li>
           <li 
-            className={`nav-item ${activeTab === 'comparison' ? 'active' : ''}`}
+            className={`nav-item nav-comparison ${activeTab === 'comparison' ? 'active' : ''}`}
             onClick={() => setActiveTab('comparison')}
           >
             <Target />
             <span>Country Comparison</span>
           </li>
           <li 
-            className={`nav-item ${activeTab === 'predictor' ? 'active' : ''}`}
+            className={`nav-item nav-predictor ${activeTab === 'predictor' ? 'active' : ''}`}
             onClick={() => setActiveTab('predictor')}
           >
             <Sliders />
@@ -470,14 +470,14 @@ function App() {
 
           <li className="nav-group-label">Historical Vault</li>
           <li 
-            className={`nav-item ${activeTab === 'records' ? 'active' : ''}`}
+            className={`nav-item nav-records ${activeTab === 'records' ? 'active' : ''}`}
             onClick={() => setActiveTab('records')}
           >
             <Award />
             <span>Legendary Records</span>
           </li>
           <li 
-            className={`nav-item ${activeTab === 'athlete' ? 'active' : ''}`}
+            className={`nav-item nav-athlete ${activeTab === 'athlete' ? 'active' : ''}`}
             onClick={() => setActiveTab('athlete')}
           >
             <Users />
@@ -586,7 +586,7 @@ function App() {
             <p className="features-section-desc">Click any of the core application capabilities below to navigate to their specialized analytical dashboards.</p>
             
             <div className="feature-shortcuts-grid">
-              <div className="feature-shortcut-card" onClick={() => setActiveTab('predictor')}>
+              <div className="feature-shortcut-card card-rose" onClick={() => setActiveTab('predictor')}>
                 <div className="feature-shortcut-icon"><Sliders size={22} /></div>
                 <h4 className="feature-shortcut-title">LA 2028 Medal Predictor</h4>
                 <p className="feature-shortcut-text">
@@ -598,7 +598,7 @@ function App() {
                 </div>
               </div>
 
-              <div className="feature-shortcut-card" onClick={() => setActiveTab('overall')}>
+              <div className="feature-shortcut-card card-cyan" onClick={() => setActiveTab('overall')}>
                 <div className="feature-shortcut-icon"><BarChart2 size={22} /></div>
                 <h4 className="feature-shortcut-title">Interactive Host Standings</h4>
                 <p className="feature-shortcut-text">
@@ -610,7 +610,7 @@ function App() {
                 </div>
               </div>
 
-              <div className="feature-shortcut-card" onClick={() => setActiveTab('comparison')}>
+              <div className="feature-shortcut-card card-emerald" onClick={() => setActiveTab('comparison')}>
                 <div className="feature-shortcut-icon"><Globe size={22} /></div>
                 <h4 className="feature-shortcut-title">Country Benchmarking</h4>
                 <p className="feature-shortcut-text">
@@ -622,7 +622,7 @@ function App() {
                 </div>
               </div>
 
-              <div className="feature-shortcut-card" onClick={() => setActiveTab('records')}>
+              <div className="feature-shortcut-card card-amber" onClick={() => setActiveTab('records')}>
                 <div className="feature-shortcut-icon"><Trophy size={22} /></div>
                 <h4 className="feature-shortcut-title">Legendary Records</h4>
                 <p className="feature-shortcut-text">
@@ -642,6 +642,10 @@ function App() {
           <div className="tab-pane">
             <div className="flex-between">
               <div className="header" style={{ marginBottom: 0 }}>
+                <div className="tab-pill-badge theme-cyan">
+                  <TrendingUp size={12} />
+                  <span>Global Growth & Historical Analytics</span>
+                </div>
                 <h2>Olympic Games Overview</h2>
                 <p>Aggregated metrics and growth trends spanning all Summer Olympic editions since 1896.</p>
               </div>
@@ -991,6 +995,10 @@ function App() {
           <div className="tab-pane">
             <div className="flex-between">
               <div className="header" style={{ marginBottom: 0 }}>
+                <div className="tab-pill-badge theme-amber">
+                  <Trophy size={12} />
+                  <span>Official Medal Leaderboard</span>
+                </div>
                 <h2>Olympic Medal Standings</h2>
                 <p>Explore, search, and filter medal counts from overall summer games database tallies.</p>
               </div>
@@ -1005,54 +1013,54 @@ function App() {
 
             <div style={{ marginTop: '2rem' }}></div>
 
-            <div className="glass-card">
-              <div className="controls-row">
-                <div className="form-group">
-                  <label>Select Year</label>
-                  <select 
-                    className="custom-select"
-                    value={selectedYearTally}
-                    onChange={(e) => setSelectedYearTally(e.target.value)}
-                  >
-                    {filters.years.map(y => (
-                      <option key={y} value={y}>
-                        {y.charAt(0).toUpperCase() + y.slice(1)}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <label>Select Country</label>
-                  <select 
-                    className="custom-select"
-                    value={selectedCountryTally}
-                    onChange={(e) => setSelectedCountryTally(e.target.value)}
-                  >
-                    {filters.countries.map(c => (
-                      <option key={c} value={c}>
-                        {c.charAt(0).toUpperCase() + c.slice(1)}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="form-group" style={{ marginLeft: 'auto', minWidth: 280 }}>
-                  <label>Search Standings</label>
-                  <div style={{ position: 'relative' }}>
-                    <input 
-                      type="text" 
-                      placeholder="Search country..." 
-                      className="search-input"
-                      value={tallySearch}
-                      onChange={(e) => setTallySearch(e.target.value)}
-                      style={{ paddingLeft: '2.5rem', width: '100%' }}
-                    />
-                    <Search size={18} color="#9ca3af" style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)' }} />
-                  </div>
-                </div>
+            <div className="filter-bar-panel">
+              <div className="form-group">
+                <label>Select Year</label>
+                <select 
+                  className="custom-select"
+                  value={selectedYearTally}
+                  onChange={(e) => setSelectedYearTally(e.target.value)}
+                >
+                  {filters.years.map(y => (
+                    <option key={y} value={y}>
+                      {y.charAt(0).toUpperCase() + y.slice(1)}
+                    </option>
+                  ))}
+                </select>
               </div>
 
+              <div className="form-group">
+                <label>Select Country</label>
+                <select 
+                  className="custom-select"
+                  value={selectedCountryTally}
+                  onChange={(e) => setSelectedCountryTally(e.target.value)}
+                >
+                  {filters.countries.map(c => (
+                    <option key={c} value={c}>
+                      {c.charAt(0).toUpperCase() + c.slice(1)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="form-group" style={{ marginLeft: 'auto', minWidth: 280 }}>
+                <label>Search Standings</label>
+                <div style={{ position: 'relative' }}>
+                  <input 
+                    type="text" 
+                    placeholder="Search country..." 
+                    className="search-input"
+                    value={tallySearch}
+                    onChange={(e) => setTallySearch(e.target.value)}
+                    style={{ paddingLeft: '2.5rem', width: '100%' }}
+                  />
+                  <Search size={18} color="#9ca3af" style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)' }} />
+                </div>
+              </div>
+            </div>
+
+            <div className="glass-card" style={{ padding: '1rem' }}>
               {loading ? (
                 <div className="loader-container">
                   <div className="spinner"></div>
@@ -1063,12 +1071,12 @@ function App() {
                   <table className="data-table">
                     <thead>
                       <tr>
-                        <th style={{ width: 80 }}>Rank</th>
-                        <th>{selectedYearTally === 'overall' && selectedCountryTally !== 'overall' ? 'Olympic Year' : 'Region'}</th>
-                        <th style={{ textAlign: 'center', width: 100 }}>Gold</th>
-                        <th style={{ textAlign: 'center', width: 100 }}>Silver</th>
-                        <th style={{ textAlign: 'center', width: 100 }}>Bronze</th>
-                        <th style={{ textAlign: 'center', width: 120 }}>Total</th>
+                        <th style={{ width: 75, textAlign: 'center' }}>Rank</th>
+                        <th>{selectedYearTally === 'overall' && selectedCountryTally !== 'overall' ? 'Olympic Year' : 'Region / Country'}</th>
+                        <th className="th-gold" style={{ textAlign: 'center', width: 105 }}>🥇 Gold</th>
+                        <th className="th-silver" style={{ textAlign: 'center', width: 105 }}>🥈 Silver</th>
+                        <th className="th-bronze" style={{ textAlign: 'center', width: 105 }}>🥉 Bronze</th>
+                        <th className="th-total" style={{ textAlign: 'center', width: 115 }}>Total</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1076,7 +1084,12 @@ function App() {
                         .filter(item => item.region.toLowerCase().includes(tallySearch.toLowerCase()))
                         .map((row, index) => (
                           <tr key={index}>
-                            <td style={{ fontWeight: 700, color: 'var(--text-muted)' }}>{index + 1}</td>
+                            <td style={{ textAlign: 'center' }}>
+                              {index === 0 ? <span className="rank-badge rank-1">1</span> :
+                               index === 1 ? <span className="rank-badge rank-2">2</span> :
+                               index === 2 ? <span className="rank-badge rank-3">3</span> :
+                               <span className="rank-num">{index + 1}</span>}
+                            </td>
                             <td style={{ fontWeight: 600 }}>{row.region}</td>
                             <td style={{ textAlign: 'center' }}>
                               <span className="medal-badge medal-gold">{row.Gold}</span>
@@ -1112,6 +1125,10 @@ function App() {
           <div className="tab-pane">
             <div className="flex-between">
               <div className="header" style={{ marginBottom: 0 }}>
+                <div className="tab-pill-badge theme-emerald">
+                  <Globe size={12} />
+                  <span>National Olympic Profiles</span>
+                </div>
                 <h2>Country Performance Hub</h2>
                 <p>Explore timeline trends, excels in specific sports, and view top Olympic medalists for individual nations.</p>
               </div>
@@ -1126,8 +1143,8 @@ function App() {
 
             <div style={{ marginTop: '2rem' }}></div>
 
-            <div className="glass-card">
-              <div className="form-group" style={{ maxWidth: 320, marginBottom: '2rem' }}>
+            <div className="filter-bar-panel">
+              <div className="form-group" style={{ minWidth: 320 }}>
                 <label>Choose Country</label>
                 <select 
                   className="custom-select"
@@ -1139,7 +1156,9 @@ function App() {
                   ))}
                 </select>
               </div>
+            </div>
 
+            <div className="glass-card" style={{ padding: '1rem' }}>
               {countryLoading ? (
                 <div className="loader-container">
                   <div className="spinner"></div>
@@ -1148,23 +1167,23 @@ function App() {
               ) : countryData ? (
                 <div>
                   {/* Timeline Chart */}
-                  <div className="glass-card" style={{ background: 'rgba(0,0,0,0.1)', padding: '1.5rem' }}>
-                    <h3>{selectedCountryAnalysis} Medals Over the Years</h3>
+                  <div className="glass-card" style={{ background: 'rgba(255,255,255,0.02)', padding: '1.5rem', border: '1px solid rgba(255,255,255,0.06)' }}>
+                    <h3 style={{ color: '#34d399' }}>{selectedCountryAnalysis} Medals Over the Years</h3>
                     <div style={{ width: '100%', height: 300, marginTop: '1rem' }}>
                       {countryData.medal_tally.length > 0 ? (
                         <ResponsiveContainer>
                           <AreaChart data={countryData.medal_tally}>
                             <defs>
                               <linearGradient id="colorMedal" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.4}/>
-                                <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0}/>
+                                <stop offset="5%" stopColor="#10b981" stopOpacity={0.45}/>
+                                <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
                               </linearGradient>
                             </defs>
                             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
                             <XAxis dataKey="Year" stroke="#9ca3af" />
                             <YAxis stroke="#9ca3af" />
                             <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderColor: 'rgba(255,255,255,0.1)', color: '#f3f4f6' }} />
-                            <Area type="monotone" dataKey="Medals" stroke="#8b5cf6" strokeWidth={3} fillOpacity={1} fill="url(#colorMedal)" />
+                            <Area type="monotone" dataKey="Medals" stroke="#10b981" strokeWidth={3} fillOpacity={1} fill="url(#colorMedal)" />
                           </AreaChart>
                         </ResponsiveContainer>
                       ) : (
@@ -1266,6 +1285,10 @@ function App() {
           <div className="tab-pane">
             <div className="flex-between">
               <div className="header" style={{ marginBottom: 0 }}>
+                <div className="tab-pill-badge theme-orange">
+                  <Target size={12} />
+                  <span>Delegation Benchmark Comparison</span>
+                </div>
                 <h2>Country Comparison Dashboard</h2>
                 <p>Benchmark physical profiles, historical standings, and delegation metrics for two competing nations.</p>
               </div>
@@ -1280,36 +1303,37 @@ function App() {
 
             <div style={{ marginTop: '2rem' }}></div>
 
-            <div className="glass-card">
-              <div className="controls-row">
-                <div className="form-group">
-                  <label>Country 1</label>
-                  <select 
-                    className="custom-select"
-                    value={country1}
-                    onChange={(e) => setCountry1(e.target.value)}
-                  >
-                    {filters.countries.filter(c => c !== 'overall' && c !== country2).map(c => (
-                      <option key={c} value={c}>{c}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div style={{ fontSize: '1.5rem', fontWeight: 700, margin: '2rem 1rem 0 1rem', color: 'var(--text-secondary)' }}>VS</div>
-
-                <div className="form-group">
-                  <label>Country 2</label>
-                  <select 
-                    className="custom-select"
-                    value={country2}
-                    onChange={(e) => setCountry2(e.target.value)}
-                  >
-                    {filters.countries.filter(c => c !== 'overall' && c !== country1).map(c => (
-                      <option key={c} value={c}>{c}</option>
-                    ))}
-                  </select>
-                </div>
+            <div className="filter-bar-panel" style={{ alignItems: 'center' }}>
+              <div className="form-group" style={{ flex: 1 }}>
+                <label style={{ color: '#38bdf8' }}>Country 1 (Delegation A)</label>
+                <select 
+                  className="custom-select"
+                  value={country1}
+                  onChange={(e) => setCountry1(e.target.value)}
+                >
+                  {filters.countries.filter(c => c !== 'overall' && c !== country2).map(c => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
               </div>
+
+              <div style={{ fontSize: '1.1rem', fontWeight: 900, padding: '0.4rem 0.9rem', borderRadius: '10px', background: 'rgba(255,255,255,0.06)', color: 'var(--text-secondary)', border: '1px solid rgba(255,255,255,0.1)' }}>VS</div>
+
+              <div className="form-group" style={{ flex: 1 }}>
+                <label style={{ color: '#34d399' }}>Country 2 (Delegation B)</label>
+                <select 
+                  className="custom-select"
+                  value={country2}
+                  onChange={(e) => setCountry2(e.target.value)}
+                >
+                  {filters.countries.filter(c => c !== 'overall' && c !== country1).map(c => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="glass-card" style={{ padding: '1rem' }}>
 
               {comparisonLoading ? (
                 <div className="loader-container">
@@ -1320,8 +1344,8 @@ function App() {
                 <div>
                   {/* Side-by-Side Statistics Grid */}
                   <div className="compare-grid">
-                    <div className="compare-country-card left">
-                      <h3 style={{ color: 'var(--primary)', marginBottom: '1.5rem', fontSize: '1.4rem' }}>{comparisonData.metrics1.country || country1}</h3>
+                    <div className="compare-country-card left" style={{ borderLeft: '4px solid #38bdf8', boxShadow: '0 10px 30px rgba(56, 189, 248, 0.15)' }}>
+                      <h3 style={{ color: '#38bdf8', marginBottom: '1.5rem', fontSize: '1.4rem' }}>{comparisonData.metrics1.country || country1}</h3>
                       <div className="compare-metric-row">
                         <span className="compare-metric-label">All-Time Medals</span>
                         <span className="compare-metric-value">{comparisonData.metrics1.total || 0}</span>
@@ -1348,8 +1372,8 @@ function App() {
                       </div>
                     </div>
 
-                    <div className="compare-country-card right">
-                      <h3 style={{ color: 'var(--secondary)', marginBottom: '1.5rem', fontSize: '1.4rem' }}>{comparisonData.metrics2.country || country2}</h3>
+                    <div className="compare-country-card right" style={{ borderLeft: '4px solid #10b981', boxShadow: '0 10px 30px rgba(16, 185, 129, 0.15)' }}>
+                      <h3 style={{ color: '#34d399', marginBottom: '1.5rem', fontSize: '1.4rem' }}>{comparisonData.metrics2.country || country2}</h3>
                       <div className="compare-metric-row">
                         <span className="compare-metric-label">All-Time Medals</span>
                         <span className="compare-metric-value">{comparisonData.metrics2.total || 0}</span>
@@ -1389,7 +1413,7 @@ function App() {
                             <YAxis stroke="#9ca3af" />
                             <Tooltip contentStyle={{ backgroundColor: '#0f172a', borderColor: 'rgba(255,255,255,0.1)', color: '#f3f4f6' }} />
                             <Legend />
-                            <Line type="monotone" name={country1} dataKey="Country1" stroke="#8b5cf6" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 8 }} />
+                            <Line type="monotone" name={country1} dataKey="Country1" stroke="#38bdf8" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 8 }} />
                             <Line type="monotone" name={country2} dataKey="Country2" stroke="#10b981" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 8 }} />
                           </LineChart>
                         </ResponsiveContainer>
@@ -1404,7 +1428,7 @@ function App() {
                   {/* Top Sports Benchmarking */}
                   <div className="prediction-results-grid">
                     <div className="glass-card">
-                      <h4 style={{ color: 'var(--primary)', marginBottom: '1rem' }}>Top Sports for {country1}</h4>
+                      <h4 style={{ color: '#38bdf8', marginBottom: '1rem' }}>Top Sports for {country1}</h4>
                       <div className="table-container">
                         <table className="data-table">
                           <thead>
@@ -1463,50 +1487,55 @@ function App() {
         {activeTab === 'predictor' && (
           <div className="tab-pane">
             <div className="header">
+              <div className="tab-pill-badge theme-rose">
+                <Sliders size={12} />
+                <span>Algorithmic Medal Projections</span>
+              </div>
               <h2>LA 2028 & Future Medal Predictor</h2>
               <p>Simulate projected medal counts for upcoming Olympic Games based on historical performance, delegation momentum, and host status.</p>
             </div>
 
-            <div className="glass-card">
-              <div className="prediction-input-container" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
-                <div className="form-group">
-                  <label>Select Target Country</label>
-                  <select 
-                    className="custom-select"
-                    value={predictCountry}
-                    onChange={(e) => setPredictCountry(e.target.value)}
-                  >
-                    {filters.countries.filter(c => c !== 'overall').map(c => (
-                      <option key={c} value={c}>{c}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <label>Target Edition Year</label>
-                  <select 
-                    className="custom-select"
-                    value={predictYear}
-                    onChange={(e) => setPredictYear(parseInt(e.target.value))}
-                  >
-                    <option value={2028}>Los Angeles 2028 (Summer)</option>
-                    <option value={2032}>Brisbane 2032 (Summer)</option>
-                  </select>
-                </div>
-
-                {/* Delegation Size Adjustment Slider */}
-                <div className="form-group">
-                  <label>Delegation Size: {delegationOverride || (predictData && predictData.features_used.athletes_estimate) || 50} Athletes</label>
-                  <input 
-                    type="range" 
-                    min="1" 
-                    max="1000" 
-                    value={delegationOverride || (predictData && predictData.features_used.athletes_estimate) || 50}
-                    onChange={(e) => setDelegationOverride(parseInt(e.target.value))}
-                    className="custom-range"
-                  />
-                </div>
+            <div className="filter-bar-panel" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', display: 'grid' }}>
+              <div className="form-group">
+                <label style={{ color: '#fb7185' }}>Select Target Country</label>
+                <select 
+                  className="custom-select"
+                  value={predictCountry}
+                  onChange={(e) => setPredictCountry(e.target.value)}
+                >
+                  {filters.countries.filter(c => c !== 'overall').map(c => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
               </div>
+
+              <div className="form-group">
+                <label style={{ color: '#38bdf8' }}>Target Edition Year</label>
+                <select 
+                  className="custom-select"
+                  value={predictYear}
+                  onChange={(e) => setPredictYear(parseInt(e.target.value))}
+                >
+                  <option value={2028}>Los Angeles 2028 (Summer)</option>
+                  <option value={2032}>Brisbane 2032 (Summer)</option>
+                </select>
+              </div>
+
+              {/* Delegation Size Adjustment Slider */}
+              <div className="form-group">
+                <label style={{ color: '#34d399' }}>Delegation Size: {delegationOverride || (predictData && predictData.features_used.athletes_estimate) || 50} Athletes</label>
+                <input 
+                  type="range" 
+                  min="1" 
+                  max="1000" 
+                  value={delegationOverride || (predictData && predictData.features_used.athletes_estimate) || 50}
+                  onChange={(e) => setDelegationOverride(parseInt(e.target.value))}
+                  className="custom-range"
+                />
+              </div>
+            </div>
+
+            <div className="glass-card" style={{ padding: '1rem' }}>
 
               {predictLoading ? (
                 <div className="loader-container">
@@ -1633,6 +1662,10 @@ function App() {
           <div className="tab-pane">
             <div className="flex-between" style={{ alignItems: 'flex-end', marginBottom: '2rem' }}>
               <div className="header" style={{ marginBottom: 0 }}>
+                <div className="tab-pill-badge theme-amber">
+                  <Award size={12} />
+                  <span>Hall of Fame & Historic Bests</span>
+                </div>
                 <h2>Legendary Olympic Records</h2>
                 <p>Explore some of the most iconic, record-shattering athletic performances in Summer Olympics history.</p>
               </div>
@@ -1665,8 +1698,8 @@ function App() {
                     {/* Visual Card Header Icon */}
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
                       <div className="carousel-card-subtitle">{rec.subtitle}</div>
-                      <div style={{ padding: '6px', borderRadius: '50%', background: 'rgba(139, 92, 246, 0.1)' }}>
-                        <Trophy size={16} color="#8b5cf6" />
+                      <div style={{ padding: '6px', borderRadius: '50%', background: 'rgba(245, 158, 11, 0.15)', border: '1px solid rgba(245, 158, 11, 0.3)' }}>
+                        <Trophy size={16} color="#fbbf24" />
                       </div>
                     </div>
 
@@ -1674,10 +1707,10 @@ function App() {
                     
                     <div style={{ 
                       background: 'rgba(255,255,255,0.02)', 
-                      border: '1px solid rgba(139, 92, 246, 0.2)', 
+                      border: '1px solid rgba(245, 158, 11, 0.3)', 
                       borderRadius: '8px', 
                       padding: '0.5rem 0.75rem', 
-                      color: '#10b981', 
+                      color: '#fbbf24', 
                       fontWeight: 800, 
                       fontSize: '0.9rem', 
                       display: 'inline-block',
@@ -1701,6 +1734,10 @@ function App() {
           <div className="tab-pane">
             <div className="flex-between">
               <div className="header" style={{ marginBottom: 0 }}>
+                <div className="tab-pill-badge theme-violet">
+                  <Users size={12} />
+                  <span>Biometric & Demographic Analysis</span>
+                </div>
                 <h2>Athlete Performance Profiles</h2>
                 <p>Deep dive into body metrics (height vs weight correlations), gender timelines, and age distributions of medalists.</p>
               </div>
@@ -1715,9 +1752,9 @@ function App() {
 
             <div style={{ marginTop: '2rem' }}></div>
 
-            <div className="glass-card">
-              <div className="form-group" style={{ maxWidth: 320, marginBottom: '2rem' }}>
-                <label>Filter by Sport</label>
+            <div className="filter-bar-panel">
+              <div className="form-group" style={{ minWidth: 320 }}>
+                <label style={{ color: '#c084fc' }}>Filter by Sport</label>
                 <select 
                   className="custom-select"
                   value={selectedSportAthlete}
@@ -1730,7 +1767,9 @@ function App() {
                   ))}
                 </select>
               </div>
+            </div>
 
+            <div className="glass-card" style={{ padding: '1rem' }}>
               {athleteLoading ? (
                 <div className="loader-container">
                   <div className="spinner"></div>
